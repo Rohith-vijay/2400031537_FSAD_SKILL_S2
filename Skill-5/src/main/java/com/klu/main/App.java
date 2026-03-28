@@ -5,7 +5,6 @@ import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.klu.App;
 import com.klu.entity.Student;
 import com.klu.entity.Certification;
 

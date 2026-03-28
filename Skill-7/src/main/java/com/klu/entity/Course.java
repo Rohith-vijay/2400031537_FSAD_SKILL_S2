@@ -1,58 +1,62 @@
 package com.klu.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 @Entity
+@Access(AccessType.FIELD)
 public class Course {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long courseId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long courseId;
 
-	private String title;
-	private String duration;
-	private double fee;
+    private String title;
+    private String duration;
+    private Double fee;
 
-	public Course() {
-	}
+    public Course() {}
 
-	public Course(Long courseId, String title, String duration, double fee) {
-		this.courseId = courseId;
-		this.title = title;
-		this.duration = duration;
-		this.fee = fee;
-	}
+    public Course(Long courseId, String title, String duration, Double fee) {
+        this.courseId = courseId;
+        this.title = title;
+        this.duration = duration;
+        this.fee = fee;
+    }
 
-	public Long getCourseId() {
-		return courseId;
-	}
+    public Long getCourseId() {
+        return courseId;
+    }
 
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
-	}
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getDuration() {
-		return duration;
-	}
+    public String getDuration() {
+        return duration;
+    }
 
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
-	public double getFee() {
-		return fee;
-	}
+    public Double getFee() {
+        return fee;
+    }
 
-	public void setFee(double fee) {
-		this.fee = fee;
-	}
-
+    public void setFee(Double fee) {
+        this.fee = fee;
+    }
 }

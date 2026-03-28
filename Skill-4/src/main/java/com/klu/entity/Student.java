@@ -1,4 +1,4 @@
-package com.klu.entity;
+	package com.klu.entity;
 
 public class Student {
 	private int studentId;
