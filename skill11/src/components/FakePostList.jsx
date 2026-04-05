@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function FakePostList() {
   const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState('all');
 
-  const fetchPosts = () => {
+  const apiBase = import.meta.env.REACT_APP_API_URL || import.meta.env.VITE_API_URL || 'https://dummyjson.com';
+
+  const fetchPosts = useCallback(() => {
     setLoading(true);
     setError(null);
     axios
-      .get('https://dummyjson.com/posts')
+      .get(`${apiBase}/posts`)
       .then((res) => {
         setPosts(res.data.posts);
-        setFilteredPosts(res.data.posts);
         setSelectedUserId('all');
         setLoading(false);
       })
@@ -24,19 +24,15 @@ function FakePostList() {
         setError(err.message);
         setLoading(false);
       });
-  };
+  }, [apiBase]);
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [fetchPosts]);
 
-  useEffect(() => {
-    if (selectedUserId === 'all') {
-      setFilteredPosts(posts);
-    } else {
-      setFilteredPosts(posts.filter((p) => p.userId === Number(selectedUserId)));
-    }
-  }, [selectedUserId, posts]);
+  const filteredPosts = selectedUserId === 'all'
+    ? posts
+    : posts.filter((p) => p.userId === Number(selectedUserId));
 
   const uniqueUserIds = [...new Set(posts.map((p) => p.userId))].sort((a, b) => a - b);
 

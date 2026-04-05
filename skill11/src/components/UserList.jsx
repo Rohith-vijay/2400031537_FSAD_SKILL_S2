@@ -7,7 +7,9 @@ function UserList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    const apiBase = import.meta.env.REACT_APP_API_URL || import.meta.env.VITE_API_URL || 'https://jsonplaceholder.typicode.com';
+
+    fetch(`${apiBase}/users`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch users from API');
         return res.json();
